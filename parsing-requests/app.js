@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express');
 const bodyParser = require('body-parser')
 
@@ -14,8 +15,15 @@ app.use('/', (req,res,next) => {
     next();
 });
 
-app.use(adminRoutes);
+// The leading '/admin' can be extracted from the path and added as a filter
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
+
+//Catch all middleware
+app.use((req,res,next) => {
+    // res.status(404).send('<h1>Page not found</h1>')
+    res.status(404).sendFile(path.join(__dirname, 'views', 'page-not-found.html'))
+})
 
 // These were broken out into a new router file
 // app.use('/add-product', (req, res, next) => {
