@@ -8,7 +8,10 @@ const shopRoutes = require('./routes/shop')
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended:false}))
+// Register a new middleware
+app.use(bodyParser.urlencoded({extended:false}));
+// Register a new middleware
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', (req,res,next) => {
     console.log('This will always log');
@@ -22,7 +25,7 @@ app.use(shopRoutes);
 //Catch all middleware
 app.use((req,res,next) => {
     // res.status(404).send('<h1>Page not found</h1>')
-    res.status(404).sendFile(path.join(__dirname, 'views', 'page-not-found.html'))
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'))
 })
 
 // These were broken out into a new router file

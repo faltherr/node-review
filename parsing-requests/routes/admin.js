@@ -16,7 +16,7 @@ router.get('/add-product', (req, res, next) => {
 //router.post allows us to filter for incoming post requests at this path
 router.post('/add-product', (req, res, next) => {
     //Conveinience function added by express
-    console.log(req.body);
+    console.log(req.body, 'POSTED');
     //res.redirect sends you to a new path
     res.redirect('/');
 });
